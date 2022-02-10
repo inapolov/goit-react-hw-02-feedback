@@ -29,18 +29,24 @@ class Feedback extends React.Component{
                 bad: prevState.bad+1,    
             };
         })
-    };
-
-   
+    };   
             
 
     render() {
 
-                function countTotalFeedback(state) {
-  return Object.values(state).reduce((a, b) => a + b, 0) 
+        function countTotalFeedback(state) {         
+            const total = state.good + state.neutral + state.bad;
+            return total;
         };
+        function countPositiveFeedbackPercentage(state) {
+            const total = state.good + state.neutral + state.bad;
+            const percentage = Math.round(state.good / total * 100)||0;
+            return percentage;
+        }
        
-     
+        // function countPositiveFeedbackPercentage() {
+    
+        // };
 
         return (
             <div className={styles.container}>
@@ -53,7 +59,7 @@ class Feedback extends React.Component{
                 <p>Neutral: <span>{this.state.neutral}</span></p>
                 <p>Bad: <span>{this.state.bad}</span></p>
                 <p>Total: <span>{countTotalFeedback(this.state)}</span></p>
-                <p>Positive feedback: <span></span>%</p>
+                <p>Positive feedback: <span>{countPositiveFeedbackPercentage(this.state) }</span>%</p>
     </div>
 
         )
