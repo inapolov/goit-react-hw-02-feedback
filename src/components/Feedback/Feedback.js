@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import styles from './Feedback.module.css'
 import Statistics from "../Statistics";
 import FeedbackOptions from "../FeedbackOptions";
 import Section from "components/Section";
+import Notification from "components/Notification";
 
 class Feedback extends React.Component{
 
@@ -51,8 +51,12 @@ class Feedback extends React.Component{
         return (
             
 <Section title="Please leave feedback">
-    <FeedbackOptions onGood={this.goodFeedback} onNeutral={this.neutralFeedback} onBad={this.badFeedback} />     
-    <Statistics good={this.state.good} neutral={this.state.neutral} bad={this.state.bad} total={countTotalFeedback(this.state)} positivePercentage={countPositiveFeedbackPercentage(this.state)}/>
+                <FeedbackOptions onGood={this.goodFeedback} onNeutral={this.neutralFeedback} onBad={this.badFeedback} />
+                {(this.state.good || this.state.neutral || this.state.bad) ? (
+                    <Statistics good={this.state.good} neutral={this.state.neutral} bad={this.state.bad} total={countTotalFeedback(this.state)} positivePercentage={countPositiveFeedbackPercentage(this.state)} />
+                ) : (<Notification message="There is no feedback"></Notification>)}           
+    
+                
 </Section>
         
         )
