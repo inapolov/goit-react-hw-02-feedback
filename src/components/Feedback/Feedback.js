@@ -31,7 +31,17 @@ class Feedback extends React.Component{
         })
     };
 
+   
+            
+
     render() {
+
+                function countTotalFeedback(state) {
+  return Object.values(state).reduce((a, b) => a + b, 0) 
+        };
+       
+     
+
         return (
             <div className={styles.container}>
       <h2>Please leave feedback</h2>
@@ -42,6 +52,8 @@ class Feedback extends React.Component{
                 <p>Good: <span>{this.state.good}</span></p> 
                 <p>Neutral: <span>{this.state.neutral}</span></p>
                 <p>Bad: <span>{this.state.bad}</span></p>
+                <p>Total: <span>{countTotalFeedback(this.state)}</span></p>
+                <p>Positive feedback: <span></span>%</p>
     </div>
 
         )
