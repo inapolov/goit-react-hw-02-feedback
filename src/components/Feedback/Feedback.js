@@ -11,29 +11,12 @@ class Feedback extends React.Component{
         neutral: 0,
         bad: 0
     };
-
-    goodFeedback = () => {        
-        this.setState((prevState) => {
-            return {
-                good: prevState.good + 1,
-            };
-        })
-    };
-    neutralFeedback = () => {
-        this.setState((prevState) => {
-            return {
-                neutral: prevState.neutral + 1,
-            };            
-        })
-    };
-    badFeedback = () => {
-        this.setState((prevState) => {
-            return {
-                bad: prevState.bad+1,    
-            };
-        })
-    };   
-            
+ 
+     
+    leaveFeedback = (option) => {
+        this.setState(prevState =>
+        ({[option]: prevState[option] + 1,}));
+    }
 
     render() {
 
@@ -51,12 +34,12 @@ class Feedback extends React.Component{
         return (
             
 <Section title="Please leave feedback">
-                <FeedbackOptions onGood={this.goodFeedback} onNeutral={this.neutralFeedback} onBad={this.badFeedback} />
+                
+                <FeedbackOptions options={ Object.keys(this.state)} onleaveFeedback={this.leaveFeedback} />
                 {(this.state.good || this.state.neutral || this.state.bad) ? (
                     <Statistics good={this.state.good} neutral={this.state.neutral} bad={this.state.bad} total={countTotalFeedback(this.state)} positivePercentage={countPositiveFeedbackPercentage(this.state)} />
-                ) : (<Notification message="There is no feedback"></Notification>)}           
-    
-                
+                ) : (<Notification message="There is no feedback"></Notification>)}  
+          
 </Section>
         
         )
