@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import Statistics from "../Statistics";
 import FeedbackOptions from "../FeedbackOptions";
 import Section from "components/Section";
@@ -51,5 +52,11 @@ class Feedback extends React.Component{
         )
     };
 };
+
+Feedback.propTypes = {
+    good: PropTypes.number,
+    neutral: PropTypes.number,
+    bad: PropTypes.number,    
+   };
 
 export default Feedback;
