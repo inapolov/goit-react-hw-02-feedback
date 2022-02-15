@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Statistics from "../Statistics";
 import FeedbackOptions from "../FeedbackOptions";
 import Section from "components/Section";
@@ -30,15 +30,21 @@ class Feedback extends React.Component{
             return percentage;
         }
        
+        const arrayState = Object.keys(this.state);
         
         return (
             
 <Section title="Please leave feedback">
                 
-                <FeedbackOptions options={ Object.keys(this.state)} onleaveFeedback={this.leaveFeedback} />
+                <FeedbackOptions options={arrayState} onleaveFeedback={this.leaveFeedback} />
                 {(this.state.good || this.state.neutral || this.state.bad) ? (
-                    <Statistics good={this.state.good} neutral={this.state.neutral} bad={this.state.bad} total={countTotalFeedback(this.state)} positivePercentage={countPositiveFeedbackPercentage(this.state)} />
-                ) : (<Notification message="There is no feedback"></Notification>)}  
+                    <Statistics
+                        good={this.state.good}
+                        neutral={this.state.neutral}
+                        bad={this.state.bad}
+                        total={countTotalFeedback(this.state)}
+                        positivePercentage={countPositiveFeedbackPercentage(this.state)} />
+                ) : (<Notification message="There is no feedback"></Notification>)} 
           
 </Section>
         
